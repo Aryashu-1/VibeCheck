@@ -1,43 +1,21 @@
-import './App.css';
-import axios from "axios"
-import { useState } from 'react';
+import React from 'react'
+import Navbar from '../Navbar/Navbar'
+import { useState } from 'react'
+import { NavLink } from 'react-router-dom'
+import axios from 'axios'
+import { useContext } from 'react'
+import { RequestIDContext } from '../../Context/RequestIDContext'
 
-import { createBrowserRouter , RouterProvider } from 'react-router-dom';
-import Homepage from './components/Homepage/Homepage';
-import Result from './components/Result/Result';
-import GetStat from './components/GetStat/GetStat';
 
-import Rootlayout from './components/RootLayout/Rootlayout';
+const Homepage = () => {
 
-/* import {Cloudinary} from "@cloudinary/url-gen"; */
-
-function App() {
-let router=createBrowserRouter([
-  {
-    path:'',
-    element:<Rootlayout/>,
-    children:[  
-      {path:'',
-      element:<Homepage/>,
-    },
-    {
-      path:'/getstats',
-      element:<GetStat/>
-    },
-    {
-      path:'/result',
-      element:<Result/>
-    }
-  ]}
-])
 
   let [cloudURL,setCloudURL] = useState('')
-  let [requestId,setRequestId] = useState('')
+  let [requestId,setRequestId] = useContext(RequestIDContext)
 
 
 
-
-  async function getImagesStats(){
+  /* async function getImagesStats(){
 
     if(!requestId) return
 
@@ -52,7 +30,7 @@ let router=createBrowserRouter([
       },
       headers: {
         'X-RapidAPI-Host': 'face-liveness-check.p.rapidapi.com',
-        'X-RapidAPI-Key': '1b2a16a073msh8b8172ab2cb9c94p17a6efjsnc20dcbb6fc2d'
+        'X-RapidAPI-Key': '08f4d919a1msheb718f871f01ef5p1d828ajsn80dcd7891758'
       }
     };
     
@@ -62,7 +40,7 @@ let router=createBrowserRouter([
     } catch (error) {
       console.error(error); 
     }
-  }
+  } */
 
 
 
@@ -89,7 +67,7 @@ let router=createBrowserRouter([
       headers: { 
         'X-RapidAPI-Host': 'face-liveness-check.p.rapidapi.com', 
         'content-type': 'application/json', 
-        'X-RapidAPI-Key': '1b2a16a073msh8b8172ab2cb9c94p17a6efjsnc20dcbb6fc2d'
+        'X-RapidAPI-Key': '08f4d919a1msheb718f871f01ef5p1d828ajsn80dcd7891758'
       },
       data : data
     };
@@ -102,9 +80,6 @@ let router=createBrowserRouter([
     .catch((error) => {
       console.log(error);
     });
-  
-
-
 
   }
 
@@ -150,29 +125,14 @@ let router=createBrowserRouter([
     /* postImageAndGetRequestId() */
 
   }
-  
-
-  
-
-
   return (
     <div>
-
-      <RouterProvider router={router}/>
-
-      {/* <Navbar />
-      <h1>Hello</h1>
-      <form>
-        <input type='file' onChange={uploadImage}></input>
-      </form> */}
-      {/* { cloudURL && (<img src={cloudURL}></img>)}
-      
-      <button className='bg-gray-800' onClick={postImageAndGetRequestId}>PostImage and get Id </button>
-      <button onClick={getImagesStats} className='bg-red-700'>Get image stats</button>
-    </div> */}
+        <form>
+            <input type='file' onChange={uploadImage}></input>
+        </form>
+        <NavLink to={'/getstats'}><button className='bg-gray-700 text-white' onClick={postImageAndGetRequestId}>PostImage and get Id </button></NavLink>
     </div>
-      
-  );
+  )
 }
 
-export default App;
+export default Homepage

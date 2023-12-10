@@ -3,11 +3,19 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import RequestStore from './Store/RequestStore';
+import StatsStore from './Store/StatsStore';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <RequestStore>
+      <StatsStore>
+        <App />
+      </StatsStore>
+      
+    </RequestStore>
+    
   </React.StrictMode>
 );
 
