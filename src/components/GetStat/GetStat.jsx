@@ -42,7 +42,7 @@ function GetStat() {
 
 
   return (
-    <div>
+    <div className='h-screen'>
         <h1>{requestId}</h1>
         <NavLink to={'/result'}><button onClick={getImagesStats} className='bg-red-700'>Get image stats</button></NavLink>
     </div>

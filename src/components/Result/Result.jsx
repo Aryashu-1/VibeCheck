@@ -7,7 +7,7 @@ function Result() {
     let [Stats,setStats] = useContext(StatsContext);
 
   return (
-    <div>{JSON.stringify(Stats)}</div>
+    <div className='h-screen'>{JSON.stringify(Stats)}</div>
   )
 }
 

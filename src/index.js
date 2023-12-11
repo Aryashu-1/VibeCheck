@@ -8,15 +8,16 @@ import StatsStore from './Store/StatsStore';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
+  <div className='antialiased text-slate-500 dark:text-slate-400 bg-white dark:bg-slate-900'>
+    <React.StrictMode>
     <RequestStore>
       <StatsStore>
         <App />
       </StatsStore>
-      
     </RequestStore>
-    
-  </React.StrictMode>
+    </React.StrictMode>
+  </div>
+  
 );
 
 // If you want to start measuring performance in your app, pass a function

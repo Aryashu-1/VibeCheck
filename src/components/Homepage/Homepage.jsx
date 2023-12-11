@@ -5,6 +5,7 @@ import { NavLink } from 'react-router-dom'
 import axios from 'axios'
 import { useContext } from 'react'
 import { RequestIDContext } from '../../Context/RequestIDContext'
+import TextType from '../Typetext/TextType'
 
 
 const Homepage = () => {
@@ -12,6 +13,7 @@ const Homepage = () => {
 
   let [cloudURL,setCloudURL] = useState('')
   let [requestId,setRequestId] = useContext(RequestIDContext)
+  let [uploaded,setUploaded] = useState(false)
 
 
 
@@ -41,6 +43,10 @@ const Homepage = () => {
       console.error(error); 
     }
   } */
+
+  function test(){
+    return
+  }
 
 
 
@@ -107,6 +113,7 @@ const Homepage = () => {
         console.log(typeof(url));
 
         setCloudURL(response.data.url)
+        setUploaded(true)
 
       } else {
         console.error("No file selected");
@@ -126,12 +133,32 @@ const Homepage = () => {
 
   }
   return (
-    <div>
-        <form>
-            <input type='file' onChange={uploadImage}></input>
-        </form>
-        <NavLink to={'/getstats'}><button className='bg-gray-700 text-white' onClick={postImageAndGetRequestId}>PostImage and get Id </button></NavLink>
+    <div className='h-screen mask-image: linear-gradient(transparent, black) '>
+
+      <div className='text-center'>
+        
+        <h1 className='px-28'><TextType text='Welcome to VibeCheck!!' /></h1> 
+        <p className='text-3xl m-4 px-28 text-white'>Your go-to tool for Image validation!</p>
+        <p className='px-28 text-xl'>Ensure your uploaded images breeze through security checks for <span className='text-sky-400'>Official Documents</span>  while guaranteeing <span className='text-sky-400'>Top-Notch Aesthetics</span> for social media. Stay confident that your visuals are both secure and visually appealing with <span className='text-sky-400'>VibeCheck</span></p>
+      </div>
+
+      <div className=' flex flex-col items-center justify-center h-[50%] '>
+        {uploaded && <img src={cloudURL} className='w-96 h-96 object-cover object-center border-white border-2 border-solid p-6 rounded-xl shadow-xl shadow-sky-300'></img>}
+
+        {!uploaded && (<form className=' '>
+                {!uploaded && <label htmlFor="imageUpload" className=' p-10 sm:p-40 text-6xl rounded-md border-2 border-dashed border-white hover:cursor-pointer'>Upload File</label>}
+                <input type='file' id='imageUpload' className='hidden' onChange={uploadImage}></input>
+          </form>)}
+             
+      </div>
+
+
+      <div className='mx-auto flex items-center justify-center w-full'>
+        <NavLink to={'/getstats'} ><button className='bg-gradient-to-r from-green-400 to-blue-500 hover:from-pink-500 hover:to-yellow-500 text-white font-bold p-6 px-9 text-2xl rounded-full active:scale-95' onClick={test}>Scan Image</button></NavLink>
+      </div>
+
     </div>
+   
   )
 }
 
